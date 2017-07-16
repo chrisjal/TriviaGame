@@ -1,0 +1,16 @@
+/*	
+// Created: July 15, 2017 18:00
+// Author: Chris Jalallian
+// Revisions: 
+*/
+
+#jumbo-main-bg {
+	background-color: #000000;
+	padding: 15px 0px;
+}
+
+#office-logo {
+	display:block;
+	margin:auto;
+	width: 30%;
+}
