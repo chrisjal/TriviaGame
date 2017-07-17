@@ -10,22 +10,19 @@ var questionPanel;
 var answerNumber = 0;
 var answerPanel;
 var userAnswer;
-
-
-var questionsAnswered = 0;
-var questionTimer = 6;
 var allowedTime;
+var questionTimer = 6;
+
+// User score counts
 var userCorrectAnswers = 0;
 var userIncorrectAnswers = 0;
 var userOutOfTime = 0;
 
 var gameObject = {
-	question: ["What kind of company is Dunder Mifflin?", "Which bear is best?", "What is Michael Scott's middle name?"],
-	answers: [["An electronics company", "A paper company", "A marketing company", "A law firm"], ["Koala Bear", "Panda Bear", "Grizzly Bear", "Black Bear"], ["Jim", "Jay", "Gordon", "Gary"]],
-	correctAnswer: ["A paper company", "Black Bear", "Gary"]
+	question: ["What kind of company is Dunder Mifflin?", "Which bear is best?", "What is Michael Scott's middle name?", "What line of work is Bob Vance in?", "Where did Bob Vance buy Phyllis' pine-scented perfume?"],
+	answers: [["An electronics company", "A paper company", "A marketing company", "A law firm"], ["Koala Bear", "Panda Bear", "Grizzly Bear", "Black Bear"], ["Jim", "Jay", "Gordon", "Gary"], ["Construction", "Refrigeration", "Sales", "Software development"], ["Downtown Los Angeles", "New York City", "Paris", "Metropolitan Orlando"]],
+	correctAnswer: ["A paper company", "Black Bear", "Gary", "Refrigeration", "Metropolitan Orlando"]
 };
-
-
 
 $("#start-button").click(function() {
 	$(this).hide();
@@ -34,16 +31,12 @@ $("#start-button").click(function() {
 
 function runGame() {
 	time();
-	// allowedTime = setInterval(decrement, 5000);
-	// questionPanel = setInterval(questionRotator, 5000);
-	// answerPanel = setInterval(answerPopulator, 5000);
-}
+};
 
+// Controls Timer and begins question/answers
 function time() {
-	
 	allowedTime = setInterval(decrement, 1000);
 	function decrement() {
-		// setInterval(decrement, 1000)
 		var timeCreator = $(".time-container");
 		if (questionTimer === 0) {
 			timeUp();
@@ -55,30 +48,25 @@ function time() {
 	}
 	questionRotator();
 	answerPopulator();
-}
+};
 
-
-
+// Writes current question
 function questionRotator() {
-	
 	$(".dynamic-question-container").html("<h4>" + gameObject.question[questionNumber] + "</h4>");
-	// questionNumber++;
-	// questionPanel = setTimeout(questionPanel, 4000);
-}
+};
 
+// Writes current answer array
 function answerPopulator() {
-	// $(".dynamic-answer-container").empty();
 	$(".dynamic-answer-container").empty();
 	var answerButtons = $(".dynamic-answer-container");
 	answerButtons.append(("<button type='button' class='btn btn-default btn-block player-answer'>" + gameObject.answers[questionNumber][0]) + "</button>");
 	answerButtons.append(("<button type='button' class='btn btn-default btn-block player-answer'>" + gameObject.answers[questionNumber][1]) + "</button>");
 	answerButtons.append(("<button type='button' class='btn btn-default btn-block player-answer'>" + gameObject.answers[questionNumber][2]) + "</button>");
 	answerButtons.append(("<button type='button' class='btn btn-default btn-block player-answer'>" + gameObject.answers[questionNumber][3]) + "</button>");
-	
+	// User guesses on click
 	$(".player-answer").click(function() {
 		userAnswer = $(this).text()
 		if (userAnswer === gameObject.correctAnswer[questionNumber]) {
-			// $("dynamic-answer-container").empty();
 			console.log("ABSOLUTELY.");
 			win();
 		}
@@ -87,7 +75,7 @@ function answerPopulator() {
 			lose();
 		}
 	})
-}
+};
 
 function win() {
 	$(".time-container").empty();
@@ -96,7 +84,7 @@ function win() {
 	userCorrectAnswers++;
 	answerNumber++
 	setTimeout(wait, 4000);
-}
+};
 
 function lose() {
 	$(".time-container").empty();
@@ -105,7 +93,7 @@ function lose() {
 	userIncorrectAnswers++;
 	answerNumber++
 	setTimeout(wait, 4000);
-}
+};
 
 function timeUp() {
 	$(".time-container").empty();
@@ -113,20 +101,20 @@ function timeUp() {
 	userOutOfTime++;
 	$(".dynamic-answer-container").html("<p>Sorry, you ran out of time! The correct answer was: " + gameObject.correctAnswer[questionNumber] + "</p>");
 	setTimeout(wait, 4000);
-}
+};
 
 function wait() {
 	$(".dynamic-question-container").empty();
 	$(".dynamic-answer-container").empty();
 	questionNumber++;
 	questionTimer = 6;
-	if (questionNumber < 3) {
+	if (questionNumber < 5) {
 		runGame()
 	}
 	else {
 		end();
 	}
-}
+};
 
 function end() {
 	clearInterval(allowedTime);
@@ -134,9 +122,13 @@ function end() {
 	$(".dynamic-game-container").append("<p>Correct Answers: " + userCorrectAnswers + "</p>");
 	$(".dynamic-game-container").append("<p>Incorrect Answers: " + userIncorrectAnswers + "</p>");
 	$(".dynamic-game-container").append("<p>Unanswered Questions: " + userOutOfTime + "</p>");
-	//add other stats, style, and Reset button
-}
-
-
-
-
+	//Reset button
+	$(".dynamic-game-container").append("<div class='row'><div class='col-sm-6 col-sm-offset-3'><div class='panel panel-default text-center start-container'><button type='button' class='btn btn-primary btn-block' id='reset-button'>Play Again</button></div></div></div>");
+		$("#reset-button").click(function() {
+			$(this).hide();
+			questionNumber = 0;
+			answerNumber = 0;
+			questionTimer = 6;
+			runGame();
+		});
+};
