@@ -10,7 +10,11 @@
 }
 
 #office-logo {
-	display:block;
-	margin:auto;
+	display: block;
+	margin: auto;
 	width: 30%;
+}
+
+.time-container, .dynamic-question-container, .dynamic-answer-container, .start-container {
+	border: none;
 }

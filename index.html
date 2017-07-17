@@ -19,23 +19,37 @@
 	<div class="jumbotron jumbo-main-bg" id="jumbo-main-bg">
 		<img id="office-logo" src="assets/images/theoffice_logo_black.png">
 	</div>
-	<div class="container-fluid">
+	<div class="container-fluid dynamic-game-container">
+		<!-- Timer -->
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
-				<div class="panel panel-default">
-					<div class="panel-body text-center timer">
-					</div>
+				<div class="panel panel-default time-container">
 				</div>
 			</div>
 		</div>
-		
+		<!-- Questions -->
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
-				<button type="button" class="btn btn-default btn-block ">A</button>
+				<div class="panel panel-default text-center dynamic-question-container">
 			</div>
 		</div>
-		
+		<!-- Answers -->
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="panel panel-default text-center dynamic-answer-container">
+				</div>
+			</div>
+		</div>
+		<!-- Start Button -->
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="panel panel-default text-center start-container">
+					<button type="button" class="btn btn-success btn-block" id="start-button">Start</button>
+				</div>
+			</div>
+		</div>
 	</div>
+	<div class="timeout"></div>
 	
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
