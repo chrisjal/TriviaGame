@@ -80,7 +80,7 @@ function answerPopulator() {
 function win() {
 	$(".time-container").empty();
 	clearInterval(allowedTime);
-	$(".dynamic-answer-container").html("<p>The correct answer was " + gameObject.correctAnswer[questionNumber] + "</p>");
+	$(".dynamic-answer-container").html("<p>Excellent! " + gameObject.correctAnswer[questionNumber] + " is correct!</p>");
 	userCorrectAnswers++;
 	answerNumber++
 	setTimeout(wait, 4000);
