@@ -3,6 +3,9 @@
 // Author: Chris Jalallian
 // Revisions: 
 */
+body {
+	font-family: 'Montserrat', sans-serif;
+}
 
 #jumbo-main-bg {
 	background-color: #000000;
@@ -17,4 +20,9 @@
 
 .time-container, .dynamic-question-container, .dynamic-answer-container, .start-container {
 	border: none;
+}
+
+#time-placeholder {
+	font-size: 7px;
+	visibility: hidden;
 }
