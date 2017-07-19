@@ -26,3 +26,7 @@ body {
 	font-size: 7px;
 	visibility: hidden;
 }
+
+.answer-images {
+	width: 400px;
+}

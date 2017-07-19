@@ -21,7 +21,8 @@ var userOutOfTime = 0;
 var gameObject = {
 	question: ["What kind of company is Dunder Mifflin?", "Which bear is best?", "What is Michael Scott's middle name?", "What line of work is Bob Vance in?", "Where did Bob Vance buy Phyllis' pine-scented perfume?"],
 	answers: [["An electronics company", "A paper company", "A marketing company", "A law firm"], ["Koala Bear", "Panda Bear", "Grizzly Bear", "Black Bear"], ["Jim", "Jay", "Gordon", "Gary"], ["Construction", "Refrigeration", "Sales", "Software development"], ["Downtown Los Angeles", "New York City", "Paris", "Metropolitan Orlando"]],
-	correctAnswer: ["A paper company", "Black Bear", "Gary", "Refrigeration", "Metropolitan Orlando"]
+	correctAnswer: ["A paper company", "Black Bear", "Gary", "Refrigeration", "Metropolitan Orlando"],
+	images: ["assets/images/1_paper.jpg", "assets/images/2_bears.gif", "assets/images/3_middle.png", "assets/images/4_bob.gif", "assets/images/5_phyllis.gif"]
 };
 
 $("#start-button").click(function() {
@@ -78,10 +79,16 @@ function answerPopulator() {
 	})
 };
 
+function displayImg() {
+	var image = $("<img class='answer-images'>").attr("src", gameObject.images[questionNumber]);
+		$(".dynamic-answer-container").append(image);
+}
+
 function win() {
 	$(".time-container").empty();
 	clearInterval(allowedTime);
 	$(".dynamic-answer-container").html("<p>Excellent! " + gameObject.correctAnswer[questionNumber] + " is correct!</p>");
+	displayImg();
 	userCorrectAnswers++;
 	answerNumber++
 	setTimeout(wait, 5000);
@@ -91,6 +98,7 @@ function lose() {
 	$(".time-container").empty();
 	clearInterval(allowedTime);
 	$(".dynamic-answer-container").html("<p>FALSE. The correct answer was " + gameObject.correctAnswer[questionNumber] + "</p>");
+	displayImg();
 	userIncorrectAnswers++;
 	answerNumber++
 	setTimeout(wait, 5000);
@@ -101,6 +109,7 @@ function timeUp() {
 	clearInterval(allowedTime);
 	userOutOfTime++;
 	$(".dynamic-answer-container").html("<p>Sorry, you ran out of time! The correct answer was: " + gameObject.correctAnswer[questionNumber] + "</p>");
+	displayImg();
 	setTimeout(wait, 5000);
 };
 
