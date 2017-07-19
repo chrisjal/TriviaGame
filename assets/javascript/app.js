@@ -39,7 +39,7 @@ function time() {
 	allowedTime = setInterval(decrement, 1000);
 	function decrement() {
 		var timeCreator = $(".time-container");
-		timeCreator.html("<div class='panel-body text-center'>" + "Time remaining: " + questionTimer + "</div>");
+		timeCreator.html("<div class='panel-body text-center time-padding'>" + "Time remaining: " + questionTimer + "</div>");
 		if (questionTimer === 0) {
 			timeUp();
 		}
