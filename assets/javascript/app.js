@@ -38,13 +38,14 @@ function time() {
 	allowedTime = setInterval(decrement, 1000);
 	function decrement() {
 		var timeCreator = $(".time-container");
+		timeCreator.html("<div class='panel-body text-center'>" + "Time remaining: " + questionTimer + "</div>");
 		if (questionTimer === 0) {
 			timeUp();
 		}
 		if (questionTimer > 0) {
 			questionTimer--;
 		}
-		timeCreator.html("<div class='panel-body text-center'>" + "Time remaining: " + questionTimer + "</div>");
+		
 	}
 	questionRotator();
 	answerPopulator();
@@ -83,7 +84,7 @@ function win() {
 	$(".dynamic-answer-container").html("<p>Excellent! " + gameObject.correctAnswer[questionNumber] + " is correct!</p>");
 	userCorrectAnswers++;
 	answerNumber++
-	setTimeout(wait, 4000);
+	setTimeout(wait, 5000);
 };
 
 function lose() {
@@ -92,7 +93,7 @@ function lose() {
 	$(".dynamic-answer-container").html("<p>FALSE. The correct answer was " + gameObject.correctAnswer[questionNumber] + "</p>");
 	userIncorrectAnswers++;
 	answerNumber++
-	setTimeout(wait, 4000);
+	setTimeout(wait, 5000);
 };
 
 function timeUp() {
@@ -100,7 +101,7 @@ function timeUp() {
 	clearInterval(allowedTime);
 	userOutOfTime++;
 	$(".dynamic-answer-container").html("<p>Sorry, you ran out of time! The correct answer was: " + gameObject.correctAnswer[questionNumber] + "</p>");
-	setTimeout(wait, 4000);
+	setTimeout(wait, 5000);
 };
 
 function wait() {
@@ -119,14 +120,14 @@ function wait() {
 function end() {
 	clearInterval(allowedTime);
 	$(".time-container").empty();
-	$(".dynamic-game-container").append("<div class='row'><div class='col-sm-6 col-sm-offset-3'><div class='panel panel-default text-center final-answers'></div></div></div>")
-	$(".final-answers").append("<p>Correct Answers: " + userCorrectAnswers + "</p>");
-	$(".final-answers").append("<p>Incorrect Answers: " + userIncorrectAnswers + "</p>");
-	$(".final-answers").append("<p>Unanswered Questions: " + userOutOfTime + "</p>");
+	$(".dynamic-game-container").append("<p class='text-center final-stats'>Correct Answers: " + userCorrectAnswers + "</p>");
+	$(".dynamic-game-container").append("<p class='text-center final-stats'>Incorrect Answers: " + userIncorrectAnswers + "</p>");
+	$(".dynamic-game-container").append("<p class='text-center final-stats'>Unanswered Questions: " + userOutOfTime + "</p>");
 	//Reset button
 	$(".dynamic-game-container").append("<div class='row'><div class='col-sm-6 col-sm-offset-3'><div class='panel panel-default text-center start-container'><button type='button' class='btn btn-primary btn-block' id='reset-button'>Play Again</button></div></div></div>");
 		$("#reset-button").click(function() {
 			$(this).hide();
+			$(".final-stats").hide();
 			questionNumber = 0;
 			answerNumber = 0;
 			questionTimer = 6;
